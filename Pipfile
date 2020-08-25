@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 flake8 = "*"
 black = "*"
+mypy = "*"
 
 [packages]
 wagtail = "<2.11,>=2.10"
