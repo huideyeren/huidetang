@@ -32,7 +32,7 @@ class User(AbstractUser):
     )
     use_nickname = models.BooleanField(verbose_name=u"ニックネームの使用", null=True, blank=True)
     interest = ClusterTaggableManager(
-        verbose_name=u"興味を持っていること", through=UserInterest, blank=True
+        verbose_name=u"興味を持っていること", through="interest_items", blank=True
     )
     twitter_id = models.CharField(
         verbose_name=u"Twitterのアカウント", max_length=50, null=True, blank=True
