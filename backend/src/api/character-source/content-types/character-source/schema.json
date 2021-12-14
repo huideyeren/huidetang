@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "character_sources",
+  "info": {
+    "singularName": "character-source",
+    "pluralName": "character-sources",
+    "displayName": "Character Source"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true,
+      "maxLength": 25,
+      "unique": true
+    },
+    "Url": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "unique": true
+    }
+  }
+}
