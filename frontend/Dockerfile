@@ -1,5 +1,5 @@
 FROM node:lts
-WORKDIR /usr/src/appFROM node:lts
+WORKDIR /code
 
 ARG UID=1000
 RUN mkdir /src/app && chown ${UID}:${UID} -R /src/app
