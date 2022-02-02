@@ -23,8 +23,10 @@ ENV LC_ALL ja_JP.UTF-8
 
 # apt-getした際のmanパッケージインストールエラーの回避策と
 # manコマンドのインストール
-RUN rm /etc/dpkg/dpkg.cfg.d/excludes \
-    && apt-get update \
+# RUN rm /etc/dpkg/dpkg.cfg.d/excludes \
+#     && apt-get update \
+#     && apt-get install -y man;
+RUN apt-get update \
     && apt-get install -y man;
 
 # zshのインストールと環境整備用パッケージのインストール
