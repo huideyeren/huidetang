@@ -1,11 +1,10 @@
 FROM node:lts
-WORKDIR /code
 
 ARG UID=1000
-RUN mkdir /src/app && chown ${UID}:${UID} -R /src/app
+RUN mkdir /code && chown ${UID}:${UID} -R /code
 USER ${UID}
 
-WORKDIR /src/app
+WORKDIR /code
 
 COPY package*.json ./
 RUN yarn install

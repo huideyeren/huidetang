@@ -22,7 +22,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/usr/src/app
+      - ./frontend:/code
     command: sh -c "yarn dev"
     ports:
       - "3000:3000"

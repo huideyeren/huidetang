@@ -43,16 +43,22 @@ ENV SHELL /usr/bin/zsh
 RUN sed -i.bak "s|$HOME:|$HOME:$SHELL|" /etc/passwd
 
 # ユーザーとホームディレクトリの環境変数設定
-ENV USER strapi
-ENV HOME /home/$USER
+
+# ユーザーIDの変数
+ARG UID=1000
+ARG USER=docker
+ARG PASSWORD=docker
+ENV HOME /home/${USER}
 
 # 一般ユーザーアカウントを追加
-RUN useradd -m $USER
-# 一般ユーザーにsudo権限を付与
-RUN gpasswd -a $USER sudo
+RUN useradd -m --groups sudo ${USER} \
+  && echo ${USER}:${PASSWORD} | chpasswd
+
+#コードを置くディレクトリを指定
+RUN mkdir /code && chown ${UID}:${UID} -R /code
 
 # 以降のRUN/CMDを実行するユーザー
-USER $USER
+USER ${USER}
 
 # 以降の作業ディレクトリを指定
 WORKDIR $HOME
@@ -99,14 +105,13 @@ RUN echo "\nprompt fade red\n" >> $HOME/.zprezto/runcoms/zshrc \
 RUN sed -i "s|'completion' \\\\|'completion' \\\\\n  'syntax-highlighting' \\\\|" $HOME/.zprezto/runcoms/zpreztorc \
     && sed -i "s|Syntax Highlighting\n#\n|Syntax Highlighting\n#\nzstyle ':prezto:module:syntax-highlighting' color 'yes'\n|" $HOME/.zprezto/runcoms/zpreztorc
 
-RUN mkdir /code
-
 WORKDIR /code
 
-COPY package*.json ./
-RUN yarn install
-
 COPY . .
+
+WORKDIR /code/frontend
+
+RUN yarn install
 
 EXPOSE 3000
 
